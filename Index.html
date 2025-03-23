@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FontBolt Gaming - Live</title>
+     <meta name="description" content="Official FontBolt Gaming Website">
+    <meta property="og:image" content="https://i.ibb.co/xKH8TBwV/fontbolt.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        #video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        #youtube-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+        }
+
+        nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00ff00;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 150px 20px;
+        }
+
+        .main-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: #00ff00;
+            border: none;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 20px 10px;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background: #00cc00;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main-content h1 {
+                font-size: 2.5em;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <div id="video-overlay"></div>
+        <iframe 
+            id="youtube-video"
+            src="https://www.youtube.com/embed/AD35vjDNcyk?autoplay=1&mute=1&loop=1&playlist=AD35vjDNcyk&controls=0&modestbranding=1&rel=0"
+            frameborder="0" 
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="content">
+        <nav>
+            <div class="logo">
+                <img src="https://i.ibb.co/xKH8TBwV/fontbolt-1.png" alt="FontBolt Logo">
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#games">Games</a>
+                <a href="#esports">Esports</a>
+                <a href="#shop">Shop</a>
+                <a href="#support">Support</a>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <h1>Warisles Development</h1>
+            <p>Join millions of players worldwide in the ultimate gaming experience</p>
+            <button class="cta-button">PLAY FREE NOW</button>
+            <button class="cta-button">WATCH TRAILER</button>
+        </div>
+    </div>
+
+    <script>
+        // Video control for GitHub Pages
+        const iframe = document.getElementById('youtube-video');
+        
+        // Ensure video plays when tab is active
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            } else {
+                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+        });
+
+        // Mobile hover fix
+        if (window.innerWidth < 768) {
+            document.querySelectorAll('.cta-button').forEach(button => {
+                button.addEventListener('touchstart', () => {
+                    button.style.transform = 'translateY(-2px)';
+                });
+                button.addEventListener('touchend', () => {
+                    button.style.transform = 'none';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
